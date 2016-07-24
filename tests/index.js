@@ -56,3 +56,24 @@ Test('Purging cache will remove all related cache')
 	})
 	.expect(cache.export())
 	.toBe(undefined);
+
+
+Test('Promoting head of cache queue works as expected')
+	.do(() => {
+		cache.add('k1', 'v1');
+		cache.add('k2', 'v2');
+		cache.add('k3', 'v3');
+		cache.add('k4', 'v4');
+		cache.add('k5', 'v5');
+
+		cache.get('k1');
+	})
+	.expect(cache.export()[0].value)
+	.toBe('v2');
+
+Test('Promoting followers of head works as expected')
+	.do(() => {
+		cache.get('k3');
+	})
+	.expect(cache.export()[cache.export().length-1].value)
+	.toBe('v3');

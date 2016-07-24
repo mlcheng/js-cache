@@ -54,18 +54,14 @@ iqwerty.cache = (function() {
 				if(list.head === lruCacheNode) {
 					list.head.next.prev = null;
 					list.head = list.head.next;
-					lruCacheNode.next = null;
-					lruCacheNode.prev = list.tail;
-					list.tail.next = lruCacheNode;
-					list.tail = lruCacheNode;
 				} else {
 					lruCacheNode.prev.next = lruCacheNode.next;
 					lruCacheNode.next.prev = lruCacheNode.prev;
-					lruCacheNode.prev = list.tail;
-					lruCacheNode.next = null;
-					list.tail.next = lruCacheNode;
-					list.tail = lruCacheNode;
 				}
+				lruCacheNode.prev = list.tail;
+				lruCacheNode.next = null;
+				list.tail.next = lruCacheNode;
+				list.tail = lruCacheNode;
 			},
 			export() {
 				let iterator = list.head, out = [];
