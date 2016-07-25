@@ -126,8 +126,22 @@ iqwerty.cache = (function() {
 		exports.valueExists = value => Object.keys(cache[identifier].map)
 			.some(key => cache[identifier].map[key].value.value === value);
 
-		exports.purge = function() {
-			delete cache[identifier];
+		exports.keys = function() {
+			if(cache.hasOwnProperty(identifier)) {
+				return Object.keys(cache[identifier].map);
+			} else {
+				return undefined;
+			}
+		};
+
+		exports.values = function() {
+			if(cache.hasOwnProperty(identifier)) {
+				let map = cache[identifier].map;
+				return Object.keys(map)
+					.map(key => map[key].value.value);
+			} else {
+				return undefined;
+			}
 		};
 
 		exports.export = function() {
@@ -136,6 +150,10 @@ iqwerty.cache = (function() {
 			} else {
 				return undefined;
 			}
+		};
+
+		exports.purge = function() {
+			delete cache[identifier];
 		};
 
 		return exports;

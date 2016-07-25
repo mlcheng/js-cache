@@ -77,3 +77,20 @@ Test('Promoting followers of head works as expected')
 	})
 	.expect(cache.export()[cache.export().length-1].value)
 	.toBe('v3');
+
+
+Test('Can get all keys of the cache')
+	.do(() => {
+		cache.purge();
+		cache.add('k1', 'v1');
+		cache.add('k2', 'v2');
+		cache.add('k3', 'v3');
+	})
+	.using(Test.ValidationFunction.ARRAY_SHALLOW)
+	.expect(cache.keys())
+	.toBe(['k1', 'k2', 'k3']);
+
+Test('Can get all values of the cache')
+	.using(Test.ValidationFunction.ARRAY_SHALLOW)
+	.expect(cache.values())
+	.toBe(['v1', 'v2', 'v3']);
