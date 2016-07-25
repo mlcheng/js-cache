@@ -44,7 +44,7 @@ Returns an array containing all key/value pairs in the cache. If the cache is em
 Clears the cache.
 
 ## An example
-Let's first build a cache.
+Let's first build a ~~snowman~~ cache.
 
 ```javascript
 let cache = iqwerty.cache.Builder('test', 2);
@@ -65,7 +65,7 @@ cache.add('key3', 'value3');
 cache.keys(); // ['key2', 'key3']
 ```
 
-The `key` cache was removed because it was the least recently used. Let's try to get `key2`
+The `key1` cache was removed because it was the least recently used. Let's try to get `key2`
 
 ```javascript
 cache.get('key2');
@@ -75,7 +75,7 @@ cache.keys(); // ['key3', 'key2']
 `key2` was promoted to the most recently used because, well, it _was_ most recently used. `key3` is next in line to be purged when needed.
 
 ## Real-world usage
-When performing any expensive task that produces the same result each time, it is a good idea to use a cache to store the results. For example, let's say you have a web application that needs to get points of interest for a certain location using an API. Your web app probably sends API requests similar to
+When performing any expensive task that produces the same result each time (or - it's OK to produce the same result), it is a good idea to use a cache to store the results. For example, let's say you have a web application that needs to get points of interest (POI) for a certain location using an API. Your web app probably sends API requests similar to
 
 ```javascript
 let location = 'Taipei, Taiwan';
