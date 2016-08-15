@@ -163,3 +163,8 @@ iqwerty.cache = (function() {
 		Builder
 	};
 })();
+
+if(typeof module !== 'undefined') {
+	/* global module */
+	module.exports = iqwerty.cache;
+}
