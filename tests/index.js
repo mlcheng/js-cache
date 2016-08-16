@@ -11,9 +11,9 @@
 
 'use strict';
 
-/* globals require */
+/* globals require, __dirname */
 const { Test, namespace } = require('../../test/test.js');
-const iqwerty = namespace('cache');
+const iqwerty = namespace(`${__dirname}/../`, 'cache');
 
 
 let cache = iqwerty.cache.Builder('test', 5);
