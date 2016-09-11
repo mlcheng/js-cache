@@ -12,11 +12,11 @@
 'use strict';
 
 /* globals require, __dirname */
-const { Test, namespace } = require('../../test/test.js');
-const iqwerty = namespace(`${__dirname}/../`, 'cache');
+const { Test } = require('../../test/test.js');
+const Cache = require(`${__dirname}/../cache.js`);
 
 
-let cache = iqwerty.cache.Builder('test', 5);
+let cache = Cache.Builder('test', 5);
 Test('Basic adding to cache works')
 	.do(() => {
 		cache.add('k1', 'v1');
