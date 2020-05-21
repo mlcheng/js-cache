@@ -1,0 +1,10 @@
+{
+	"js": {
+		"bundle": [
+			{
+				"entry": "cache.js",
+				"export": "iqwerty"
+			}
+		]
+	}
+}

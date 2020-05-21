@@ -2,19 +2,13 @@
 
 This is a simple and useful implementation of LRU cache, which can be used to store many things in your web application. LRU stands for "Least Recently Used", which will cache things as long as there is enough space. If there isn't enough space, the least recently used object will be removed from the cache.
 
-A demo will be available on my [playground](https://www.michaelcheng.us/lib-js/cache/) soon.
+A demo is available on my [playground](https://playground.michaelcheng.us/lib-js/cache/).
 
 ## Usage
-First off, a cache needs to be specified with two parameters: an identifier (preferably named after its intended use), and a cache size.
+First off, a cache needs to be specified with a cache size.
 
 ```javascript
-let cache = iqwerty.cache.Builder('http', 5);
-```
-
-If you're comfortable using `Symbols`, it is recommended to use `Symbol` instead of a string
-
-```javascript
-let cache = iqwerty.cache.Builder(Symbol('http'), 5);
+const cache = new iqwerty.cache.Cache(5);
 ```
 
 The API is simple, with only 7 exposed methods.
@@ -47,7 +41,7 @@ Clears the cache.
 Let's first build a ~~snowman~~ cache.
 
 ```javascript
-let cache = iqwerty.cache.Builder('test', 2);
+const cache = new iqwerty.cache.Cache(2);
 ```
 
 This cache can only fit 2 objects inside. Let's fill it.
@@ -78,7 +72,7 @@ cache.keys(); // ['key3', 'key2']
 When performing any expensive task that produces the same result each time (or - it's OK to produce the same result), it is a good idea to use a cache to store the results. For example, let's say you have a web application that needs to get points of interest (POI) for a certain location using an API. Your web app probably sends API requests similar to
 
 ```javascript
-let location = 'Taipei, Taiwan';
+const location = 'Taipei, Taiwan';
 
 $http('/api/poi')
 	.success(callback)
@@ -88,15 +82,15 @@ $http('/api/poi')
 Since points of interest probably will not change while the user is using your app, you can probably cache the result using iQwerty cache.
 
 ```javascript
-let cache = iqwerty.cache.Builder(Symbol('poi'), 10);
+const poiCache = new iqwerty.cache.Cache(10);
 let location = 'Taipei, Taiwan';
 
-if(cache.get(location)) {
-	callback(cache.get(location));
+if(poiCache.get(location)) {
+	callback(poiCache.get(location));
 } else {
 	$http('/api/poi')
 		.success(response => {
-			cache.add(location, response);
+			poiCache.add(location, response);
 			callback(response);
 		})
 		.get({ location });
