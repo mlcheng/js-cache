@@ -6,5 +6,8 @@
 				"export": "iqwerty"
 			}
 		]
+	},
+	"test": {
+		"targets": ["cache_test.js"]
 	}
 }
